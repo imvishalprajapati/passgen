@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect,useRef} from 'react'
+import React, { useState, useCallback, useEffect,useRef} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,7 +7,7 @@ function App() {
   const [length, setLength] = useState(8)
   const[numberAllowed, setNumberAllowed] = useState(false)
   const[charAllowed, setCharAllowed] = useState(false)
-  const[password, setPassword] = ('')
+  const[password, setPassword] = useState('')
 
   const passwordRef= useRef(null)
 
@@ -27,7 +27,7 @@ function App() {
 
     const copyPasswordToClipboard= () =>{
       window.navigator.clipboard.writeText(password)
-      passwordRef.current?.select()
+      passwordRef.current.select()
     }
 
 
@@ -49,7 +49,7 @@ function App() {
                   className='outline-none w-full py-1 px-3'
                   placeholder='Password'
                   ref={passwordRef}
-                  readOnly
+                  
             />
             <button onClick={copyPasswordToClipboard} className=' outline-none bg-pink-800 text-white px-3 py-0.5 shrink-0  '>
               copy
@@ -57,14 +57,15 @@ function App() {
         </div>
         <div className='flex text-sm gap-x-2'>
           <div className='flex items-center gap-x-1'>
-            <input
-              type="range"
-              min={6}
-              max={220}
-              value={length}
-              className='cursor-pointer'
-              onClick={(e) => setLength(e.length.value)}
-            ></input>
+          <input
+            type="range"
+            min={6}
+            max={30}
+            value={length}
+            className='cursor-pointer'
+            onChange={(e) => setLength(e.target.value)}
+              />
+
             <label htmlFor='length'>length:{length}</label>
           </div>
            
